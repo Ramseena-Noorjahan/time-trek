@@ -1,4 +1,5 @@
 //import userModel
+const Razorpay = require("razorpay");
 const userModel = require("../model/userModel");
 const Product = require("../model/productModel");
 const bcrypt = require("bcrypt");
@@ -36,7 +37,6 @@ const key_id = "rzp_test_CUiyz16ts3sjjL";
 const key_secret = "Oc6oWhAKrkHVV7unGaLSfIzh";
 
 // Create the instance object with the environment variables
-const Razorpay = require("razorpay");
 const { AsyncResource } = require("async_hooks");
 var instance = new Razorpay({
   key_id: key_id,
