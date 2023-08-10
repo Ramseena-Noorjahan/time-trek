@@ -1,8 +1,8 @@
 //import userModel
-const Razorpay = require("razorpay");
 const userModel = require("../model/userModel");
 const Product = require("../model/productModel");
 const bcrypt = require("bcrypt");
+const Razorpay = require("razorpay");
 const Cart = require("../model/cartModel");
 const test = require("../model/testModel");
 const orderModel = require("../model/orderModel");
@@ -17,37 +17,37 @@ require("dotenv").config();
 // const accountSid = "AC4c0446b84a6e989d7e25352b30088470";
 // const authToken = "87b3cd4e0fef8f00d305138ffe7d2f4f";
 // const client = require("twilio")(accountSid, authToken, {
-//   lazyLoading: true,
-// });
-
-// const client = require("twilio")(process.env.accountSid, process.env.authToken, {
-//   lazyLoading: true,
-// });
-
-const client = require("twilio")(
-  process.env.accountSid,
-  process.env.authToken,
-  {
-    lazyLoading: true,
-  }
-);
-
-// Access the environment variables
-const key_id = "rzp_test_CUiyz16ts3sjjL";
-const key_secret = "Oc6oWhAKrkHVV7unGaLSfIzh";
-
-// Create the instance object with the environment variables
-const { AsyncResource } = require("async_hooks");
-var instance = new Razorpay({
-  key_id: key_id,
-  key_secret: key_secret,
-});
-
-const getRegister = (req, res) => {
-  try {
-    res.render("register", {
-      message: undefined,
-      cartitem:undefined,
+  //   lazyLoading: true,
+  // });
+  
+  // const client = require("twilio")(process.env.accountSid, process.env.authToken, {
+    //   lazyLoading: true,
+    // });
+    
+    const client = require("twilio")(
+      process.env.accountSid,
+      process.env.authToken,
+      {
+        lazyLoading: true,
+      }
+      );
+      
+      // Access the environment variables
+      const key_id = "rzp_test_CUiyz16ts3sjjL";
+      const key_secret = "Oc6oWhAKrkHVV7unGaLSfIzh";
+      
+      // Create the instance object with the environment variables
+      const { AsyncResource } = require("async_hooks");
+      var instance = new Razorpay({
+        key_id: key_id,
+        key_secret: key_secret,
+      });
+      
+      const getRegister = (req, res) => {
+        try {
+          res.render("register", {
+            message: undefined,
+            cartitem:undefined,
       whishlistitem:undefined,
       user: req.session.user || undefined,
     });
