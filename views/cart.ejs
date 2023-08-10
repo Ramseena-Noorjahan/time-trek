@@ -1,0 +1,96 @@
+<%- include("layout") %>
+
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <%if(typeof data2 !=='undefined' ){%>
+                            <h1>Cart is empty</h1>
+                            <%}else{%>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.forEach(function(product,index){ %>
+                                            <tr>
+                                                <td class="cart__product__item">
+
+                                                    <img src="/product_images/<%= product.productId.image[0]%>"
+                                                        alt="image" width="130px">
+                                                    <div class="cart__product__item__title">
+                                                        <h6>
+                                                            <%= product.productId.productname%>
+                                                        </h6>
+
+                                                    </div>
+                                                </td>
+                                                <td class="cart__price">₹<%= product.price%>
+                                                </td>
+                                                <td class="cart__quantity">
+                                                    <div class="quantity">
+                                                        <div class="number">
+                                                            <a
+                                                                onclick="changeqnty('<%= userId %>','<%= product.productId._id %>',-1)">-</a>
+                                                            <span id="<%= product.productId._id %>">
+                                                                <%= product.quantity %>
+                                                            </span>
+
+                                                            <a onclick="changeqnty('<%= userId %>','<%= product.productId._id %>',1)"
+                                                                class="bn38 btn ad">
+                                                                +
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="cart__total">₹<%= product.price*product.quantity%>
+                                                </td>
+                                                <td class="cart__close"><span class="icon_close"
+                                                        onclick="deleteitem('<%= product.productId._id %>')"></span>
+                                                </td>
+                                            </tr>
+
+                                            <% }) %>
+
+                                    </tbody>
+                                </table>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="/shop">Continue Shopping</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4 offset-lg-8">
+                    <div class="cart__total__procced">
+                        <h6>Cart total</h6>
+                        <ul>
+                            <li>Subtotal <span>₹<%= total%></span></li>
+                            <li>Total <span>₹<%= total%></span></li>
+                        </ul>
+                        <a href="/checkout" class="primary-btn">Proceed to checkout</a>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include("layoutEnd") %>

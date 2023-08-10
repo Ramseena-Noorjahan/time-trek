@@ -1,0 +1,61 @@
+<%- include("layout") %>
+    <section class="ftco-section ftco-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+                        <% if(typeof data2=='undefined' ){%>
+
+                            <table class="table">
+                                <thead class="thead-primary">
+                                    <tr class="text-center">
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% data.forEach((value)=>{%>
+                                        <tr class="text-center">
+                                            <td class="product__cart__item">
+                                                <div class="product__cart__item__pic">
+                                                    <img src="/product_images/<%= value.productId.image[0] %>"
+                                                        style="width: 100px; height: 150px;" alt="">
+                                                </div>
+                                                <div class="product__cart__item__text">
+                                                    <h6>
+                                                        <%= value.productId.name %>
+                                                    </h6>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>$<%= value.productId.price %>
+                                                </h5>
+                                            </td>
+                                            <td>
+                                                <button onclick="addToCart('<%= value.productId._id %>') "
+                                                    class="product-remove btn p-2 btn-primary">+ Add To Cart</button>
+                                            </td>
+
+                                            <!-- <td class="cart__close">
+                                            <a onclick="deleteitem('<%= value.productId._id %>')">X</a></td> -->
+
+                                        </tr>
+                                        <%}) %>
+                                </tbody>
+                            </table>
+
+
+                    </div>
+                </div>
+                <%} else { %>
+                    <h3>Wish-List Empty</h1>
+                        <% }%>
+                            <div class="col-lg-4">
+                            </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include("layoutEnd") %>

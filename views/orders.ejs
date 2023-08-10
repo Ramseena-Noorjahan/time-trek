@@ -1,0 +1,88 @@
+<%- include("layout") %>
+
+
+    <div class="container-fluid pt-5 px-4 mb-5">
+        <div class="row pt-4 g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <table class="table" id="categorytable">
+                        <% if(typeof data !==null){ %>
+
+
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Method</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Option</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% data.reverse().forEach((value,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= index+1 %>
+                                        </td>
+                                        <td>
+                                            <%= value.Date.toISOString().substring(0,10) %>
+                                        </td>
+
+                                        <td>
+                                            <%= value.totalAmount %>
+                                        </td>
+                                        <td>
+                                            <%= value.paymentMethod %>
+                                        </td>
+                                        <td>
+                                            <%= value.status %>
+                                        </td>
+
+
+                                        <td><a href="/singleOrder?id=<%= value._id %>"><button
+                                                    class="btn btn-primary">view</button></a></td>
+                                        <%if(value.status=='Delivered' ){ %>
+
+                                            <td><a href="/returnOrder?id=<%= value._id %>"
+                                                    onclick="return confirm('Do you want to return this product?')"><button
+                                                        class="btn btn-success">Return</button></a></td>
+                                            <% }else if( value.status=="placed" || value.status=="Shipped" ){ %>
+                                                <td><a href="/cancelOrder?id=<%= value._id %>"
+                                                        onclick="return confirm('Do you want to cancel this product?')"><button
+                                                            class="btn btn-danger">Cancel</button></a></td>
+
+                                                <%}else if(value.status=="cancelled" || value.status=="returned" ){ %>
+
+                                                    <%} %>
+
+                                                        <% })%>
+                            </tbody>
+
+
+
+                            <% }else{ %>
+
+
+                                <h2>Order is Empty</h2>
+
+
+
+                                <% }%>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Table End -->
+    </div>
+
+
+
+
+    <%- include("layoutEnd") %>

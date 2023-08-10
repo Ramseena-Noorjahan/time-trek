@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>add products</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/admin/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/admin/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/admin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/admin/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="/admin" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>time trek</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+
+                    <div class="ms-3">
+                        <h6 class="mb-0">Ramsi</h6>
+                        <span>Admin</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/admin/home" class="nav-item nav-link "><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/admin/user_management" class="nav-item nav-link "><i class="fa fa-user me-2"></i>User
+                        Management</a>
+                    <a href="/admin/category" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>Category</a>
+                    <a href="/admin/products" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Products</a>
+                    <a href="/admin/orders" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Orders</a>
+                    <a href="/admin/banner" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>Banner</a>
+                    <a href="/admin/coupon" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>Coupon</a>
+                    <a href="/admin/salesreport" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>Sales Report</a>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="/admin" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="/admin" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <span class="d-none d-lg-inline-flex">Admin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="/admin/logout" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+
+
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Add Product</h6>
+                            <form action="/admin/addProduct" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label class="form-label">Product name</label>
+                                    <input type="String" class="form-control" name="name" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Images</label>
+                                    <input class="form-control" type="file" id="formFileMultiple" multiple name="images"
+                                        accept="image/*" id="image" required>
+                                    <% if(typeof message !=='undefined' ){ %>
+                                        <span>
+                                            <%=message%>
+                                        </span>
+                                        <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <input type="String" class="form-control" name="description" id="description" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Price</label>
+                                    <input type="number" class="form-control" name="price" id="price" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">OfferPrice</label>
+                                    <input type="number" class="form-control" name="offerprice" id="offerprice" >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" name="start" >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Expire Date</label>
+                                    <input type="date" class="form-control" name="expiry" >
+                                </div>
+                                
+
+
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Stock</label>
+                                    <input type="number" class="form-control" name="stock" id="stock" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+                                        name="category" >
+                                        <% category.forEach(function(category,index){ %>
+                                            <option value=<%=category.name%>><%=category.name%>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Table End -->
+
+
+
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+<script>
+
+     let name=document.getElementById("name")
+    let Description=document.getElementById("Description")
+    let image=document.getElementById("image")
+    let stock=document.getElementById("stock")
+    let price=document.getElementById("price")
+    let offerprice=document.getElementById("offerprice")
+    
+  
+    
+    
+  name.addEventListener("input",()=>{
+      if(name.value.trim()==''){
+        name.setCustomValidity("name cannot be null")
+      }else if(name.value.trim().length<4){
+        name.setCustomValidity("minimum 4 letters required")
+
+      }
+      else{
+        name.setCustomValidity("")
+     }
+      })
+
+Description.addEventListener("input",()=>{
+      if(Description.value.trim()==''){
+        Description.setCustomValidity("Description cannot be null")
+      }else if(Description.value.trim().length<10){
+        Description.setCustomValidity("minimum 10 letters required")
+    }else{
+        Description.setCustomValidity("")
+     }
+      })
+
+image.addEventListener("input",()=>{
+      if(image.value.trim()==''){
+        image.setCustomValidity("image cannot be null")
+      }else if(image.value.trim().length<10){
+        image.setCustomValidity("minimum 10 letters required")
+    }else{
+        image.setCustomValidity("")
+     }
+      })
+
+stock.addEventListener("input",()=>{
+    if(stock.value.trim()==''){
+        stock.setCustomValidity("stock cannot be null")
+    }else{
+        stock.setCustomValidity("")
+     }
+      })
+
+price.addEventListener("input",()=>{
+    if(price.value.trim()==''){
+        price.setCustomValidity("price cannot be null")
+    }else{
+        price.setCustomValidity("")
+     }
+      })
+
+offerprice.addEventListener("input",()=>{
+    if(offerprice.value.trim()==''){
+        offerprice.setCustomValidity("price cannot be null")
+    }else{
+        offerprice.setCustomValidity("")
+     }
+      })
+
+
+</script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/admin/lib/chart/chart.min.js"></script>
+    <script src="/admin/lib/easing/easing.min.js"></script>
+    <script src="/admin/lib/waypoints/waypoints.min.js"></script>
+    <script src="/admin/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/admin/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+
+
+    <!-- Template Javascript -->
+    <script src="/admin/js/main.js"></script>
+</body>
+
+</html>

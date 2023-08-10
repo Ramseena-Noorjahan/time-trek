@@ -1,0 +1,111 @@
+<%- include("layout") %>
+
+
+    <section class="contact spad m-4">
+        <div class="container">
+            <div class="row">
+                <% data.forEach((value,index)=> { %>
+                    <div class="col-6 col-xl-5 mb-4">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Product <%= index+1 %>
+                            </h6>
+
+                            <div class="testimonial-item text-center">
+                                <img class="img-fluid  mx-auto mb-4"
+                                    src="/product_images/<%= value.productId.image[0] %>"
+                                    style="width: 100px; height: 100px;">
+                                <h5 class="mb-1">
+                                    <%= value.productId.productname %>
+                                </h5>
+                                <p class="mb-0"><b>Quantity :<%= value.quantity %></b></p>
+                                <p class="mb-0"><b>Total Amount :<%= value.productId.price * value.quantity %></b></p>
+                                <p class="mb-0">
+                                    <%= value.productId.description %>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <% }) %>
+
+
+
+                        <div class="col-6 col-xl-5 mb-4 cart-wrap ftco-animate mx-4">
+
+                            <div class="cart-total mb-3">
+
+                                <h5 class="mb-3">Delivery Address </h5>
+                                <p class="d-flex">
+                                    <span>Address: </span>
+                                    <span>
+                                        <%= orderData.deliveryDetails%>
+                                    </span>
+                                </p>
+
+                            </div>
+
+                            <div class="cart-total mb-3">
+
+                                <p class="d-flex">
+                                    <span>Subtotal</span>
+                                    <span>₹<%= orderData.totalBefore%></span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Delivery</span>
+                                    <span>₹0.00</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Discount</span>
+                                    <span>₹<%= orderData.discount%> (<%= orderData.couponCode%>)</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Wallet</span>
+                                    <span>₹<%= orderData.wallet%></span>
+                                </p>
+                                <hr>
+                                <p class="d-flex total-price">
+                                    <span>Total</span>
+                                    <span>₹<%= orderData.totalAmount%></span>
+                                </p>
+                            </div>
+
+
+                        </div>
+
+            </div>
+            <div class="track">
+                <% if (orderData.status == "placed") { %>
+                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                        class="text">Order confirmed</span> </div>
+                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered
+                </span> </div>
+                <%}else if (orderData.status == "Shipped") {%>
+                
+                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                        class="text">Order confirmed</span> </div>
+                <div class="step active "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered
+                </span> </div>
+                
+                
+                
+                <%}else {%>
+                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                        class="text">Order confirmed</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered
+                </span> </div>
+                        <%}%>
+                        
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+    <%- include("layoutEnd") %>

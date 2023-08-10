@@ -1,0 +1,321 @@
+<%- include("layout") %>
+
+
+
+  <!-- Modal address-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/addAddress" class="billing-form" method="post">
+            
+            <div class="row align-items-end">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="firstname">Name</label>
+                  <input type="text" class="form-control" placeholder="" name="name" required />
+                </div>
+              </div>
+
+
+
+
+
+
+              <div class="w-100"></div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <div class="select-wrap">
+                    <div class="icon">
+                      <span class="ion-ios-arrow-down"></span>
+                    </div>
+                    <select id="" class="form-control" name="country" required>
+                      <option value="France">France</option>
+                      <option value="India">India</option>
+                      <option value="Philippines">Philippines</option>
+                      <option value="Korea">Korea</option>
+                      <option value="Hongkong">Hongkong</option>
+                      <option value="Japan">Japan</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="towncity">Town / City</label>
+                  <input type="text" class="form-control" placeholder="" name="town" required>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="streetaddress">Street Address</label>
+                  <input type="text" class="form-control" placeholder="House number and street name" name="street"
+                    required />
+                </div>
+              </div>
+              <div class="w-100"></div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="postcodezip">Postcode / ZIP *</label>
+                  <input type="text" class="form-control" placeholder="" name="postcode" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="text" class="form-control" placeholder="" name="phone" required />
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal profile-->
+  
+ <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">edit prifile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/editProfile" class="billing-form" method="post">
+          
+          <div class="row align-items-end">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="firstname">Name</label>
+                <input type="text" class="form-control" placeholder="" value="<%=user.name%>"name="name" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" placeholder="" value="<%=user.number%>"name="phone" required />
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <label for="firstname">Email</label>
+                <input type="email" class="form-control" placeholder="" value="<%=user.email%>" name="email"required />
+              </div>
+            </div>
+           
+
+
+
+
+
+
+
+            
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+ 
+ 
+
+
+  <section class="contact spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="contact__content">
+            <div class="contact__address">
+              <h5>User Profile</h5>
+              <ul>
+                <li>
+                  <h6><i class="fa fa-user"></i> Name</h6>
+                  <p>
+                    <%=user.name%>
+                  </p>
+
+                </li>
+                <li>
+                  <h6><i class="fa fa-phone"></i> Phone</h6>
+                  <p><span>
+                      <%=user.number%>
+                    </span></p>
+                </li>
+                <li>
+                  <h6><i class="fa fa-envelope"></i> Email</h6>
+                  <p>
+                    <%=user.email%>
+                  </p>
+                </li>
+                <li>
+                  <h6><i class="fa fa-wallet"></i> Wallet</h6>
+                  <p>
+                    <%=user.wallet%>
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+
+
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <%if(address.length> 0){%>
+
+
+            <% address.forEach((value,index)=>{ %>
+
+
+              <div class="bg-white card addresses-item mb-4  shadow">
+                <div class="gold-members p-4">
+                  <div class="media">
+                    <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
+                    <div class="media-body">
+                      <h6 class="mb-1 text-secondary"><i class="fa fa-map-marker"></i>Address <%=index+1%>
+                      </h6>
+                      <p class="text-black">
+                        <%=value.name%>, <%= value.street %>, <%= value.town %>, <%= value.postcode %>, <%=
+                                  value.country %>
+                                  <div class="col-2">
+                                    <button disabled class="site-btn">
+                                      <a href="/delete-address?id=<%=value._id%>"> Delete </a>
+
+                                    </button>
+                                  </div>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <%}) %>
+                  <%}else{%>
+                    No Adrress
+                    <%}%>
+
+
+              </div>
+
+              <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#exampleModal">
+                Add Address
+              </button>
+              <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#editProfile">
+                Edit profile
+              </button>
+        </div>
+      </div>
+  </section>
+
+  <script>
+    let name = document.getElementById("name")
+    let email = document.getElementById("email")
+    let password = document.getElementById("password")
+    let number = document.getElementById("number")
+
+    name.addEventListener("input", () => {
+      if (name.value.trim() == '') {
+        name.setCustomValidity("name cannot be null")
+      } else if (name.value.trim().length < 4) {
+        name.setCustomValidity("minimum 4 letters required")
+
+      }
+      else {
+        name.setCustomValidity("")
+      }
+    })
+
+
+    number.addEventListener("input", () => {
+      if (number.value.trim() == '') {
+        number.setCustomValidity("number cannot be null")
+      } else if (number.value.trim().length < 10) {
+        number.setCustomValidity("minimum 10 letters required")
+
+      }
+      else if (number.value.trim().length > 10) {
+        number.setCustomValidity("maximum 10 letters required")
+
+      }
+      else {
+        number.setCustomValidity("")
+      }
+    })
+
+
+    email.addEventListener("input", () => {
+      if (email.value.trim() == '') {
+        email.setCustomValidity("email cannot be null")
+      } else if (email.value.trim().length <= 4) {
+        email.setCustomValidity("minimum 4 letters required")
+
+      }
+      else {
+        email.setCustomValidity("")
+      }
+    })
+
+    password.addEventListener("input", () => {
+      if (password.value.trim() == '') {
+        password.setCustomValidity("password cannot be null")
+      } else if (password.value.trim().length < 6) {
+        password.setCustomValidity("minimum 5 letters required")
+
+      }
+
+      else {
+        password.setCustomValidity("")
+      }
+    })
+
+
+  </script>
+
+  <!-- Js Plugins -->
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/mixitup.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/jquery.slicknav.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.nicescroll.min.js"></script>
+  <script src="js/main.js"></script>
+  </body>
+
+  </html>
