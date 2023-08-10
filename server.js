@@ -29,7 +29,7 @@ app.set("view engine","ejs")
 
 //mongoos connection
 const mongoose = require('mongoose')
-mongoose.connect("mongodb://127.0.0.1:27017/timetrek").then(()=>{
+mongoose.connect("mongodb+srv://Hufako:KhimLMVeRYzJVgBP@cluster0.2cjh3iw.mongodb.net/timetrek").then(()=>{
     console.log("Connected to MongoDB");
 }).catch(err=>console.log(err))
 
