@@ -79,7 +79,7 @@ const postRegister = async (req, res) => {
       const phoneNumber = "+91" + req.body.number;
       req.session.email = req.body.email;
       req.session.number = phoneNumber;
-
+console.log(process.env.servceSid)
       await client.verify.v2
         .services(process.env.servceSid)
         // .services("VAef5766a0f00d71021c9d316c8027a920")
