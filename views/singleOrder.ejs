@@ -74,30 +74,36 @@
 
             </div>
             <div class="track">
-                <% if (orderData.status == "placed") { %>
+                <% if (orderData.status=="placed" ) { %>
                     <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                        class="text">Order confirmed</span> </div>
-                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
-                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered
-                </span> </div>
-                <%}else if (orderData.status == "Shipped") {%>
-                
-                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                        class="text">Order confirmed</span> </div>
-                <div class="step active "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
-                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered
-                </span> </div>
-                
-                
-                
-                <%}else {%>
-                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                        class="text">Order confirmed</span> </div>
-                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
-                <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Delivered
-                </span> </div>
-                        <%}%>
-                        
+                            class="text">Order confirmed</span> </div>
+                    <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text">
+                            Shipped </span> </div>
+                    <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
+                            class="text">Delivered
+                        </span> </div>
+                    <%}else if (orderData.status=="Shipped" ) {%>
+
+                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                class="text">Order confirmed</span> </div>
+                        <div class="step active "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span
+                                class="text"> Shipped </span> </div>
+                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
+                                class="text">Delivered
+                            </span> </div>
+
+
+
+                        <%}else if(orderData.status=="Delivered" ) {%>
+                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                                    class="text">Order confirmed</span> </div>
+                            <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span
+                                    class="text"> Shipped </span> </div>
+                            <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
+                                    class="text">Delivered
+                                </span> </div>
+                            <%}%>
+
             </div>
         </div>
 
