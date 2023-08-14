@@ -142,7 +142,7 @@
                   Coupon</a>
               </div>
             </div>
-        
+
 
             <%if(coupon){%>
               <div class="input-group col-12 mt-5 ">
@@ -150,109 +150,112 @@
                   <h4>Coupons</h4>
                   <div class="row">
                     <article class="card fl-left">
-  
-                        <%coupon.forEach((data)=>{%>
-                          <section class="card-cont mt-3">
-  
-                            <div class="test d-flex justify-content-between">
-                              <h3><i class="fa fa-tag"></i><%=data.couponcode%></h3>
-      
-<button class="btn btn-warning" onclick="applyCoupon('<%= data.couponcode %>')">Use Code</button>
 
-                            </div>
-                            <%=data.couponamount%>
-      
-                          </section>
-                       <% })%>
-                      
-  
-                    
-  
-  
+                      <%coupon.forEach((data)=>{%>
+                        <section class="card-cont mt-3">
+
+                          <div class="test d-flex justify-content-between">
+                            <h3 class="me-2"><i class="fa fa-tag"></i>
+                              <%=data.couponcode%>
+                            </h3>
+
+                            <button class="btn btn-warning " onclick="applyCoupon('<%= data.couponcode %>')">Use
+                              Code</button>
+
+                          </div>
+                          <%=data.couponamount%>
+
+                        </section>
+                        <% })%>
+
+
+
+
+
                     </article>
-  
-  
+
+
                   </div>
-  
+
                 </section>
-  
-              </div>
-  
-            <%}%>
 
-           
-            <div class="row mt-5 pt-3 d-flex">
-
-              <div class="col-md-6 ">
-
-                <div class="cart-detail cart-total bg-light p-3 p-md-4">
-                  <h3 class="billing-heading mb-4">Cart Total</h3>
-                  <p class="d-flex ">
-                    <span>Subtotal</span>
-                    ₹
-                    <span id="total">
-                      <%= total%>
-                    </span>
-                  </p>
-                  <p class="d-flex">
-                    <span>Delivery</span>
-                    <span>₹0.00</span>
-                  </p>
-                  <p class="d-flex">
-                    <span>Wallet</span>
-                    ₹
-                    <span id="wallet">0.00</span>
-                  </p>
-                  <p class="d-flex">
-                    <span>Discount</span>
-                    ₹
-                    <span id="coupondiscount">0.00</span>
-                  </p>
-                  <hr />
-                  <p class="d-flex ">
-                    <span>Total</span>
-                    ₹
-                    <span id="total-amount">
-                      <%=total%>
-                    </span>
-                  </p>
-                </div>
               </div>
 
-              <div class="col-md-6">
+              <%}%>
 
-                <div class="cart-detail bg-light p-3 p-md-4">
-                  <h3 class="billing-heading mb-4">Payment Method</h3>
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <div class="radio">
-                        <label><input type="radio" value="cod" name="payment" class="mr-2" checked />
-                          COD</label>
-                      </div>
-                    </div>
 
-                    <div class="col-md-12">
-                      <div class="radio">
-                        <label><input type="radio" value="online" name="payment" class="mr-2" checked />
-                          OnlinePayment</label>
-                      </div>
+                <div class="row mt-5 pt-3 d-flex">
+
+                  <div class="col-md-6 ">
+
+                    <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                      <h3 class="billing-heading mb-4">Cart Total</h3>
+                      <p class="d-flex ">
+                        <span>Subtotal</span>
+                        ₹
+                        <span id="total">
+                          <%= total%>
+                        </span>
+                      </p>
+                      <p class="d-flex">
+                        <span>Delivery</span>
+                        <span>₹0.00</span>
+                      </p>
+                      <p class="d-flex">
+                        <span>Wallet</span>
+                        ₹
+                        <span id="wallet">0.00</span>
+                      </p>
+                      <p class="d-flex">
+                        <span>Discount</span>
+                        ₹
+                        <span id="coupondiscount">0.00</span>
+                      </p>
+                      <hr />
+                      <p class="d-flex ">
+                        <span>Total</span>
+                        ₹
+                        <span id="total-amount">
+                          <%=total%>
+                        </span>
+                      </p>
                     </div>
-                    <%if(wallet !==0){ %>
+                  </div>
+
+                  <div class="col-md-6">
+
+                    <div class="cart-detail bg-light p-3 p-md-4">
+                      <h3 class="billing-heading mb-4">Payment Method</h3>
                       <div class="form-group">
                         <div class="col-md-12">
-                          <div class="radio " id="radio_div">
-                            <label><input type="checkbox" value="wallet" name="wallet" class="mr-2"
-                                onclick="checkWallet()" />
-                              Wallet</label>
+                          <div class="radio">
+                            <label><input type="radio" value="cod" name="payment" class="mr-2" checked />
+                              COD</label>
                           </div>
                         </div>
-                      </div>
-                      <% } %>
+
+                        <div class="col-md-12">
+                          <div class="radio">
+                            <label><input type="radio" value="online" name="payment" class="mr-2" checked />
+                              OnlinePayment</label>
+                          </div>
+                        </div>
+                        <%if(wallet !==0 && total> wallet){ %>
+                          <div class="form-group">
+                            <div class="col-md-12">
+                              <div class="radio " id="radio_div">
+                                <label><input type="checkbox" value="wallet" name="wallet" class="mr-2"
+                                    onclick="checkWallet()" />
+                                  Wallet</label>
+                              </div>
+                            </div>
+                          </div>
+                          <% } %>
 
 
-                        <p>
-                          <button type="submit" class="btn btn-primary py-3 px-4">Place an order</button>
-                        </p>
+                            <p>
+                              <button type="submit" class="btn btn-primary py-3 px-4">Place an order</button>
+                            </p>
           </form>
         </div>
       </div>

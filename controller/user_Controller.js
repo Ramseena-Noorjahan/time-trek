@@ -17,38 +17,38 @@ require("dotenv").config();
 // const accountSid = "AC4c0446b84a6e989d7e25352b30088470";
 // const authToken = "87b3cd4e0fef8f00d305138ffe7d2f4f";
 // const client = require("twilio")(accountSid, authToken, {
-  //   lazyLoading: true,
-  // });
-  
-  // const client = require("twilio")(process.env.accountSid, process.env.authToken, {
-    //   lazyLoading: true,
-    // });
-    
-    const client = require("twilio")(
-      process.env.accountSid,
-      process.env.authToken,
-      {
-        lazyLoading: true,
-      }
-      );
-      
-      // Access the environment variables
-      const key_id = "rzp_test_CUiyz16ts3sjjL";
-      const key_secret = "Oc6oWhAKrkHVV7unGaLSfIzh";
-      
-      // Create the instance object with the environment variables
-      const { AsyncResource } = require("async_hooks");
-      var instance = new Razorpay({
-        key_id: key_id,
-        key_secret: key_secret,
-      });
-      
-      const getRegister = (req, res) => {
-        try {
-          res.render("register", {
-            message: undefined,
-            cartitem:undefined,
-      whishlistitem:undefined,
+//   lazyLoading: true,
+// });
+
+// const client = require("twilio")(process.env.accountSid, process.env.authToken, {
+//   lazyLoading: true,
+// });
+
+const client = require("twilio")(
+  process.env.accountSid,
+  process.env.authToken,
+  {
+    lazyLoading: true,
+  }
+);
+
+// Access the environment variables
+const key_id = "rzp_test_CUiyz16ts3sjjL";
+const key_secret = "Oc6oWhAKrkHVV7unGaLSfIzh";
+
+// Create the instance object with the environment variables
+const { AsyncResource } = require("async_hooks");
+var instance = new Razorpay({
+  key_id: key_id,
+  key_secret: key_secret,
+});
+
+const getRegister = (req, res) => {
+  try {
+    res.render("register", {
+      message: undefined,
+      cartitem: undefined,
+      whishlistitem: undefined,
       user: req.session.user || undefined,
     });
   } catch (error) {
@@ -61,8 +61,8 @@ const postRegister = async (req, res) => {
     if (userExist) {
       res.render("register", {
         message: "User already exist",
-        cartitem:undefined,
-        whishlistitem:undefined,
+        cartitem: undefined,
+        whishlistitem: undefined,
         user: req.session.user || undefined,
       });
     } else {
@@ -89,8 +89,8 @@ const postRegister = async (req, res) => {
       res.render("otp", {
         message: undefined,
         user: req.session.user || undefined,
-        cartitem:undefined,
-        whishlistitem:undefined,
+        cartitem: undefined,
+        whishlistitem: undefined,
       });
     }
   } catch (error) {
@@ -119,8 +119,8 @@ const postOtp = async (req, res) => {
     } else {
       res.render("otp", {
         message: "otp failed",
-        cartitem:undefined,
-        whishlistitem:undefined,
+        cartitem: undefined,
+        whishlistitem: undefined,
         user: req.session.user || undefined,
       });
     }
@@ -133,16 +133,14 @@ const getLogin = (req, res) => {
   try {
     res.render("login", {
       message: undefined,
-      cartitem:undefined,
-      whishlistitem:undefined,
+      cartitem: undefined,
+      whishlistitem: undefined,
       user: req.session.user || undefined,
     });
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 const postLogin = async (req, res) => {
   try {
@@ -160,24 +158,24 @@ const postLogin = async (req, res) => {
           res.render("login", {
             message: "not verified",
             user: req.session.user || undefined,
-            whishlistitem:undefined,
-            cartitem:undefined,
+            whishlistitem: undefined,
+            cartitem: undefined,
           });
         }
       } else {
         res.render("login", {
           message: "enter password incorrect",
           user: req.session.user || undefined,
-          whishlistitem:undefined,
-          cartitem:undefined,
+          whishlistitem: undefined,
+          cartitem: undefined,
         });
       }
     } else {
       res.render("login", {
         message: "enter email incorrect",
         user: req.session.user || undefined,
-        whishlistitem:undefined,
-        cartitem:undefined,
+        whishlistitem: undefined,
+        cartitem: undefined,
       });
     }
   } catch (error) {
@@ -190,15 +188,14 @@ const gethome = async (req, res) => {
     const todayDate = new Date();
     const banner = await bannerModel.find();
     const products = await Product.find({ deleted: false });
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   }
-   const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
     res.render("home", {
       products,
       banner,
@@ -211,12 +208,6 @@ const gethome = async (req, res) => {
     console.log(error);
   }
 };
-
-
-
-
-
-
 
 const getlogout = (req, res) => {
   try {
@@ -231,15 +222,15 @@ const getdetailpage = async (req, res) => {
   try {
     const id = req.query.id;
     const productdata = await Product.findOne({ _id: id });
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
 
-   } const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
-    
     res.render("productdetails", {
       productdata,
       cartitem,
@@ -254,16 +245,21 @@ const getdetailpage = async (req, res) => {
 const getuserprofile = async (req, res) => {
   try {
     const user = await userModel.findById(req.session.user);
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
 
-   } const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
-    
-    res.render("userProfile", { user, address: user.address,cartitem,whishlistitem});
+    res.render("userProfile", {
+      user,
+      address: user.address,
+      cartitem,
+      whishlistitem,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -284,14 +280,14 @@ const editProfile = async (req, res) => {
 const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.session.user });
-    const whishlist = await whishlistModal.findOne({user:req.session.user})   
-    if(whishlist){
-     var whishlistitem = whishlist.product.length
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
     }
-    
+
     if (cart) {
       const userData = await userModel.findOne({ _id: req.session.user });
-      var cartitem = cart.product.length
+      var cartitem = cart.product.length;
       const cartData = await Cart.findOne({ user: userData._id }).populate(
         "product.productId"
       );
@@ -329,25 +325,33 @@ const getCart = async (req, res) => {
           res.render("cart", {
             user: req.session.user || undefined,
             data: cartData.product,
-            userId: userData._id,cartitem,
-            total: Total,whishlistitem
+            userId: userData._id,
+            cartitem,
+            total: Total,
+            whishlistitem,
           });
         } else {
           res.render("cart", {
             user: req.session.user || undefined,
-            data2: "hi",cartitem,whishlistitem
+            data2: "hi",
+            cartitem,
+            whishlistitem,
           });
         }
       } else {
         res.render("cart", {
           user: req.session.user || undefined,
-          data2: "hi",cartitem,whishlistitem
+          data2: "hi",
+          cartitem,
+          whishlistitem,
         });
       }
     } else {
       res.render("cart", {
         user: req.session.user || undefined,
-        data2: "hi",cartitem,whishlistitem
+        data2: "hi",
+        cartitem,
+        whishlistitem,
       });
     }
 
@@ -382,30 +386,26 @@ const addToCart = async (req, res) => {
               $push: {
                 product: {
                   productId: productId,
-                  price: productData.price- productData.productOffer,
+                  price: productData.price - productData.productOffer,
                 },
               },
             }
           );
           res.json({ success: true });
-        }else if(
-          productData.categoryOffer > productData.productOffer 
-         
-        ){
+        } else if (productData.categoryOffer > productData.productOffer) {
           await Cart.findOneAndUpdate(
             { user: userId },
             {
               $push: {
                 product: {
                   productId: productId,
-                  price: productData.price- productData.categoryOffer,
+                  price: productData.price - productData.categoryOffer,
                 },
               },
             }
           );
           res.json({ success: true });
-        } 
-        else {
+        } else {
           await Cart.findOneAndUpdate(
             { user: userId },
             {
@@ -425,25 +425,31 @@ const addToCart = async (req, res) => {
       ) {
         const data = new Cart({
           user: userId,
-          product: [{ productId: productId, price:productData.price- productData.productOffer }],
+          product: [
+            {
+              productId: productId,
+              price: productData.price - productData.productOffer,
+            },
+          ],
         });
         await data.save();
         res.json({ success: true });
-      }else if(
-        productData.categoryOffer > productData.productOffer 
-          
-      ){
+      } else if (productData.categoryOffer > productData.productOffer) {
         const data = new Cart({
           user: userId,
-          product: [{ productId: productId, price: productData.price-productData.categoryOffer }],
+          product: [
+            {
+              productId: productId,
+              price: productData.price - productData.categoryOffer,
+            },
+          ],
         });
         await data.save();
         res.json({ success: true });
-      }
-       else {
+      } else {
         const data = new Cart({
           user: userId,
-          product: [{ productId: productId, price:productData.price }],
+          product: [{ productId: productId, price: productData.price }],
         });
         await data.save();
         res.json({ success: true });
@@ -499,24 +505,22 @@ const deleteCartItem = async (req, res) => {
 };
 
 const getcheckout = async (req, res) => {
-
   try {
-    const coupon = await couponModel.find()
-    
+    const coupon = await couponModel.find();
+
     const userData = await userModel.findOne({ _id: req.session.user });
 
     const cartData = await Cart.findOne({ user: userData._id }).populate(
       "product.productId"
     );
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   }
-   const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
     let Total;
     if (cartData.product != 0) {
       const total = await Cart.aggregate([
@@ -559,15 +563,13 @@ const getcheckout = async (req, res) => {
         cartitem,
         whishlistitem,
         user: req.session.user || undefined,
-        coupon
+        coupon,
       });
     }
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 const postAddAddress = async (req, res) => {
   try {
@@ -644,14 +646,12 @@ const placeOrder = async (req, res) => {
     await orderNew.save();
     let orderId = orderNew._id;
 
-    await userModel.findByIdAndUpdate(user._id, {
-      wallet: 0,
-    });
+    // await userModel.findByIdAndUpdate(user._id, {
+    //   wallet: 0,
+    // });
 
     if (status == "placed") {
       const couponData = await couponModel.findById(req.session.couponId);
-
-      console.log(couponData);
       if (couponData) {
         console.log("if");
         let newLimit = couponData.limit - 1;
@@ -693,15 +693,19 @@ const placeOrder = async (req, res) => {
 
 const getOrderSuccess = async (req, res) => {
   try {
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   } const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
-    res.render("orderSuccess", { user: req.session.user || undefined ,cartitem,whishlistitem});
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
+    res.render("orderSuccess", {
+      user: req.session.user || undefined,
+      cartitem,
+      whishlistitem,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -709,17 +713,17 @@ const getOrderSuccess = async (req, res) => {
 
 const getOrder = async (req, res) => {
   try {
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   } const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
     let userData = await userModel.findOne({ _id: req.session.user });
     const orderData = await orderModel.find({ user: userData._id });
-    const today = new Date()
+    const today = new Date();
     res.render("orders", {
       user: req.session.user || undefined,
       data: orderData,
@@ -739,15 +743,14 @@ const getSingleOrder = async (req, res) => {
     const orderData = await orderModel
       .findById(id)
       .populate("product.productId");
-      const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   } const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
-
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
     res.render("singleOrder", {
       data: orderData.product,
       orderData,
@@ -763,14 +766,12 @@ const getSingleOrder = async (req, res) => {
 const returnOrder = async (req, res) => {
   try {
     const id = req.query.id;
-    const reason = req.body.reason
-
+    const reason = req.body.reason;
     const orderDataa = await orderModel.findByIdAndUpdate(id, {
       status: "returned",
       wallet: 0,
-      reason:reason
+      reason: reason,
     });
-
     if (orderDataa.paymentMethod == "COD") {
       const total = orderDataa.wallet;
       await userModel.findByIdAndUpdate(orderDataa.user, {
@@ -782,7 +783,6 @@ const returnOrder = async (req, res) => {
         $inc: { wallet: total },
       });
     }
-
     if (orderDataa) {
       res.redirect("/orders");
     }
@@ -797,17 +797,16 @@ const cancelOrder = async (req, res) => {
     const orderData = await orderModel.findById(orderId);
     const wallet = orderData.wallet;
     const total = orderData.totalAmount + wallet;
-    const reason = req.body.reason
+    const reason = req.body.reason;
 
     await orderModel.findByIdAndUpdate(orderId, {
-      $set: { status: "cancelled" ,reason: reason},
+      $set: { status: "cancelled", reason: reason },
     });
-
-    if (orderData.paymentMethod == "COD") {
-      await userModel.findByIdAndUpdate(orderData.user, {
-        $inc: { wallet: wallet },
-      });
-    } else {
+    console.log(orderData.paymentMethod);
+    if (orderData.paymentMethod == "cod" ) {
+      console.log("etnrt cod ");
+    } else if (orderData.paymentMethod == "online") {
+      console.log("enter online");
       await userModel.findByIdAndUpdate(orderData.user, {
         $inc: { wallet: total },
       });
@@ -819,7 +818,6 @@ const cancelOrder = async (req, res) => {
       const quantity = orderData.product[i].quantity;
       await Product.findByIdAndUpdate(productId, { $inc: { stock: quantity } });
     }
-
     res.redirect("/orders");
   } catch (error) {
     console.log(error);
@@ -879,7 +877,6 @@ const verifyPayment = async (req, res) => {
     let userData = await userModel.findOne({ _id: req.session.user });
     const cartData = await Cart.findOne({ user: userData._id });
     const product = cartData.product;
-
     const details = req.body;
     const crypto = require("crypto");
     let hmac1 = crypto.createHmac("sha256", "Oc6oWhAKrkHVV7unGaLSfIzh");
@@ -889,7 +886,6 @@ const verifyPayment = async (req, res) => {
         details.payment.razorpay_payment_id
     );
     hmac1 = hmac1.digest("hex");
-
     if (hmac1 == details.payment.razorpay_signature) {
       let orderReceipt = details.order.receipt;
       let test1 = await orderModel.findByIdAndUpdate(
@@ -910,7 +906,6 @@ const verifyPayment = async (req, res) => {
           $inc: { stock: -quantity },
         });
       }
-
       res.json({ success: true });
     } else {
       await orderModel.deleteOne({ _id: details.order.receipt });
@@ -923,23 +918,20 @@ const verifyPayment = async (req, res) => {
 
 const getShop = async (req, res) => {
   try {
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   }const whishlist = await whishlistModal.findOne({user:req.session.user})   
-   if(whishlist){
-    var whishlistitem = whishlist.product.length
-   }
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
+    const whishlist = await whishlistModal.findOne({ user: req.session.user });
+    if (whishlist) {
+      var whishlistitem = whishlist.product.length;
+    }
     const todayDate = new Date();
-
     const page = Number(req.query.page) || 1;
     const limit = 6;
     const skip = (page - 1) * limit;
-
     let Search = req.query.search || "";
     Search = Search.trim();
-
     let category = req.query.category || "ALL";
     let cat = [];
     const catData = await Category.find();
@@ -979,7 +971,7 @@ const getShop = async (req, res) => {
       user: req.session.user || undefined,
       todayDate,
       cartitem,
-      whishlistitem
+      whishlistitem,
     });
   } catch (error) {
     console.log(error.message);
@@ -988,8 +980,6 @@ const getShop = async (req, res) => {
 
 const checkWallet = async (req, res) => {
   try {
-   
-
     const userData = await userModel.findOne({ _id: req.session.user });
     const walleta = userData.wallet;
     if (walleta > 0) {
@@ -1003,15 +993,14 @@ const checkWallet = async (req, res) => {
 
 const getWhishlist = async (req, res) => {
   try {
-    const cart = await Cart.findOne({user:req.session.user})
-    if(cart){
-     var cartitem = cart.product.length
-
-   }
+    const cart = await Cart.findOne({ user: req.session.user });
+    if (cart) {
+      var cartitem = cart.product.length;
+    }
     const whishlist = await whishlistModal.findOne({ user: req.session.user });
     if (whishlist) {
       const userData = await userModel.findOne({ _id: req.session.user });
-     var whishlistitem = whishlist.product.length
+      var whishlistitem = whishlist.product.length;
       const whishlistData = await whishlistModal
         .findOne({ user: userData._id })
         .populate("product.productId");
@@ -1024,7 +1013,8 @@ const getWhishlist = async (req, res) => {
           res.render("whishlist", {
             user: req.session.user || undefined,
             data: whishlistData.product,
-            cartitem,whishlistitem
+            cartitem,
+            whishlistitem,
             // userId: userData._id,
             // total: Total,
           });
@@ -1032,22 +1022,24 @@ const getWhishlist = async (req, res) => {
           res.render("whishlist", {
             user: req.session.user || undefined,
             data2: "hi",
-            cartitem,whishlistitem
-
+            cartitem,
+            whishlistitem,
           });
         }
       } else {
         res.render("whishlist", {
           user: req.session.user || undefined,
           data2: "hi",
-          cartitem,whishlistitem
+          cartitem,
+          whishlistitem,
         });
       }
     } else {
       res.render("whishlist", {
         user: req.session.user || undefined,
         data2: "hi",
-        cartitem,whishlistitem
+        cartitem,
+        whishlistitem,
       });
     }
 
@@ -1178,42 +1170,41 @@ const addToCartWishlist = async (req, res) => {
   }
 };
 
-
-const salesReport = async (req,res) => {
+const salesReport = async (req, res) => {
   try {
-    let start
-    let end  
-
+    let start;
+    let end;
     req.query.start ? (start = new Date(req.query.start)) : (start = "ALL");
     req.query.end ? (end = new Date(req.query.end)) : (end = "ALL");
-
-
-    if(start != "ALL" && end != "ALL"){
+    if (start != "ALL" && end != "ALL") {
       const data = await orderModel.aggregate([
-          {
-              $match : {
-                  $and : [{Date : {$gte : start}},{Date : {$lte : end}},{ status: { $eq: "Delivered" } }]
-              }
-          }
-      ])
+        {
+          $match: {
+            $and: [
+              { Date: { $gte: start } },
+              { Date: { $lte: end } },
+              { status: { $eq: "Delivered" } },
+            ],
+          },
+        },
+      ]);
       let SubTotal = 0;
-    data.forEach(function (value) {
-      SubTotal = SubTotal + value.totalAmount;
-    });
-      res.render('admin/sales-report', {data , total: SubTotal})
-  }else{
-    const orderData = await orderModel.find({ status: { $eq: "Delivered" } });
-    let SubTotal = 0;
-    orderData.forEach(function (value) {
-      SubTotal = SubTotal + value.totalAmount;
-    });
-    res.render("admin/sales-report", { data: orderData, total: SubTotal });
-  }
-
+      data.forEach(function (value) {
+        SubTotal = SubTotal + value.totalAmount;
+      });
+      res.render("admin/sales-report", { data, total: SubTotal });
+    } else {
+      const orderData = await orderModel.find({ status: { $eq: "Delivered" } });
+      let SubTotal = 0;
+      orderData.forEach(function (value) {
+        SubTotal = SubTotal + value.totalAmount;
+      });
+      res.render("admin/sales-report", { data: orderData, total: SubTotal });
+    }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 module.exports = {
   getRegister,
@@ -1230,7 +1221,6 @@ module.exports = {
   changeQuantity,
   deleteCartItem,
   getcheckout,
-  
   postAddAddress,
   deleteAddress,
   placeOrder,
@@ -1247,5 +1237,5 @@ module.exports = {
   getWhishlist,
   addWhishlist,
   addToCartWishlist,
-  salesReport
+  salesReport,
 };

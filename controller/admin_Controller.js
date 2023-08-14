@@ -36,11 +36,6 @@ const postLogin = (req, res) => {
 };
 
 const getAdminHome = async (req, res) => {
-  // try {
-  //   res.render("admin/adminhome");
-  // } catch (error) {
-  //   console.log(error);
-  // }
   try {
     const orderData = await orderModel.find({ status: { $eq: "Delivered" } });
     let SubTotal = 0;
