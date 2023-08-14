@@ -217,6 +217,13 @@
                                                     <% } %>
                                         </div>
                                     </div>
+                                    <%if(orderData.status=="cancelled" || orderData.status=="returned"){%>
+                                        <div class="col-12">
+                                            <h6>Reason : <%= orderData.reason %>
+                                            </h6>
+                                        </div>
+                                    <%}%>
+                                 
                                 </div>
                             </div>
                         </div>

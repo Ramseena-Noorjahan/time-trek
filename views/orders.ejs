@@ -1,6 +1,7 @@
 <%- include("layout") %>
 
 
+
     <div class="container-fluid pt-5 px-4 mb-5">
         <div class="row pt-4 g-4">
             <div class="col-12">
@@ -25,6 +26,92 @@
 
                             <tbody>
                                 <% data.reverse().forEach((value,index)=>{ %>
+
+                                  <!-- modal start -->
+                                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Return or Cancel Reason</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="/cancelOrder?id=<%= value._id %>" class="billing-form" method="post">
+                                        
+                                        <div class="row align-items-end">
+                                          <div class="col-12">
+                                            <div class="form-group">
+                                              <label for="firstname">Reason</label>
+                                              <input type="text" class="form-control" placeholder="" name="reason" required />
+                                            </div>
+                                          </div>
+
+
+
+
+
+
+                                                    
+                                                  </div>
+
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button class="btn btn-secondary" data-dismiss="modal">
+                                                  Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">submit</button>
+                                              </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                          </div>
+                                          <!-- modal end -->
+                                            <!-- modal start -->
+                                  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                  aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Return or Cancel Reason</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form action="/returnOrder?id=<%= value._id %>" class="billing-form" method="post">
+                                          
+                                          <div class="row align-items-end">
+                                            <div class="col-12">
+                                              <div class="form-group">
+                                                <label for="firstname">Reason</label>
+                                                <input type="text" class="form-control" placeholder="" name="reason" required />
+                                              </div>
+                                            </div>
+  
+  
+  
+  
+  
+  
+                                                      
+                                                    </div>
+  
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                  </button>
+                                                  <button type="submit" class="btn btn-primary">submit</button>
+                                                </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                            </div>
+                                            <!-- modal end -->
+  
                                     <tr>
                                         <td>
                                             <%= index+1 %>
@@ -48,13 +135,21 @@
                                                     class="btn btn-primary">view</button></a></td>
                                         <%if(value.status=='Delivered' ){ %>
 
-                                            <td><a href="/returnOrder?id=<%= value._id %>"
-                                                    onclick="return confirm('Do you want to return this product?')"><button
-                                                        class="btn btn-success">Return</button></a></td>
+                                            <td>
+                                              <!-- <a href="/returnOrder?id=<%= value._id %>"
+                                                    onclick="return confirm('Do you want to return this product?')"></a> -->
+                                                    <button
+                                                        class="btn btn-success"data-toggle="modal" data-target="#exampleModal1">Return</button> 
+                                                  </td>
+
                                             <% }else if( value.status=="placed" || value.status=="Shipped" ){ %>
-                                                <td><a href="/cancelOrder?id=<%= value._id %>"
-                                                        onclick="return confirm('Do you want to cancel this product?')"><button
-                                                            class="btn btn-danger">Cancel</button></a></td>
+                                                <td>
+                                                  <!-- <a href="/cancelOrder?id=<%= value._id %>"
+                                                        onclick="return confirm('Do you want to cancel this product?')">
+                                                      </a> -->
+                                                      <button
+                                                            class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel</button>
+                                                    </td>
 
                                                 <%}else if(value.status=="cancelled" || value.status=="returned" ){ %>
 

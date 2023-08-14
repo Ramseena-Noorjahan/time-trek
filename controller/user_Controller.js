@@ -160,18 +160,24 @@ const postLogin = async (req, res) => {
           res.render("login", {
             message: "not verified",
             user: req.session.user || undefined,
+            whishlistitem:undefined,
+            cartitem:undefined,
           });
         }
       } else {
         res.render("login", {
           message: "enter password incorrect",
           user: req.session.user || undefined,
+          whishlistitem:undefined,
+          cartitem:undefined,
         });
       }
     } else {
       res.render("login", {
         message: "enter email incorrect",
         user: req.session.user || undefined,
+        whishlistitem:undefined,
+        cartitem:undefined,
       });
     }
   } catch (error) {
@@ -493,7 +499,10 @@ const deleteCartItem = async (req, res) => {
 };
 
 const getcheckout = async (req, res) => {
+
   try {
+    const coupon = await couponModel.find()
+    
     const userData = await userModel.findOne({ _id: req.session.user });
 
     const cartData = await Cart.findOne({ user: userData._id }).populate(
@@ -550,6 +559,7 @@ const getcheckout = async (req, res) => {
         cartitem,
         whishlistitem,
         user: req.session.user || undefined,
+        coupon
       });
     }
   } catch (error) {
@@ -709,10 +719,12 @@ const getOrder = async (req, res) => {
    }
     let userData = await userModel.findOne({ _id: req.session.user });
     const orderData = await orderModel.find({ user: userData._id });
+    const today = new Date()
     res.render("orders", {
       user: req.session.user || undefined,
       data: orderData,
       cartitem,
+      today,
       whishlistitem,
     });
   } catch (error) {
@@ -751,10 +763,12 @@ const getSingleOrder = async (req, res) => {
 const returnOrder = async (req, res) => {
   try {
     const id = req.query.id;
+    const reason = req.body.reason
 
     const orderDataa = await orderModel.findByIdAndUpdate(id, {
       status: "returned",
       wallet: 0,
+      reason:reason
     });
 
     if (orderDataa.paymentMethod == "COD") {
@@ -783,9 +797,10 @@ const cancelOrder = async (req, res) => {
     const orderData = await orderModel.findById(orderId);
     const wallet = orderData.wallet;
     const total = orderData.totalAmount + wallet;
+    const reason = req.body.reason
 
     await orderModel.findByIdAndUpdate(orderId, {
-      $set: { status: "cancelled" },
+      $set: { status: "cancelled" ,reason: reason},
     });
 
     if (orderData.paymentMethod == "COD") {
@@ -1215,8 +1230,7 @@ module.exports = {
   changeQuantity,
   deleteCartItem,
   getcheckout,
-  // getform,
-  // postform,
+  
   postAddAddress,
   deleteAddress,
   placeOrder,

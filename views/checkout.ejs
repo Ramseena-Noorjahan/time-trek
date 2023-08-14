@@ -142,7 +142,45 @@
                   Coupon</a>
               </div>
             </div>
+        
 
+            <%if(coupon){%>
+              <div class="input-group col-12 mt-5 ">
+                <section class="container">
+                  <h4>Coupons</h4>
+                  <div class="row">
+                    <article class="card fl-left">
+  
+                        <%coupon.forEach((data)=>{%>
+                          <section class="card-cont mt-3">
+  
+                            <div class="test d-flex justify-content-between">
+                              <h3><i class="fa fa-tag"></i><%=data.couponcode%></h3>
+      
+<button class="btn btn-warning" onclick="applyCoupon('<%= data.couponcode %>')">Use Code</button>
+
+                            </div>
+                            <%=data.couponamount%>
+      
+                          </section>
+                       <% })%>
+                      
+  
+                    
+  
+  
+                    </article>
+  
+  
+                  </div>
+  
+                </section>
+  
+              </div>
+  
+            <%}%>
+
+           
             <div class="row mt-5 pt-3 d-flex">
 
               <div class="col-md-6 ">
@@ -199,23 +237,22 @@
                           OnlinePayment</label>
                       </div>
                     </div>
-                    <%if(wallet !== 0){
-                      %>
+                    <%if(wallet !==0){ %>
                       <div class="form-group">
                         <div class="col-md-12">
                           <div class="radio " id="radio_div">
-                            <label><input type="checkbox" value="wallet" name="wallet" class="mr-2" onclick="checkWallet()"/>
+                            <label><input type="checkbox" value="wallet" name="wallet" class="mr-2"
+                                onclick="checkWallet()" />
                               Wallet</label>
                           </div>
                         </div>
                       </div>
-                      <%
-                    } %>
+                      <% } %>
 
 
-                    <p>
-                      <button type="submit" class="btn btn-primary py-3 px-4">Place an order</button>
-                    </p>
+                        <p>
+                          <button type="submit" class="btn btn-primary py-3 px-4">Place an order</button>
+                        </p>
           </form>
         </div>
       </div>
@@ -226,33 +263,33 @@
     </div>
   </section>
   <script>
-    function checkWallet(){
+    function checkWallet() {
       let walletPlace = document.getElementById("wallet")
       let amount = document.getElementById("total-amount").innerHTML
-      let totalAmount =document.getElementById("total-amount")
+      let totalAmount = document.getElementById("total-amount")
       let radioDiv = document.getElementById("radio_div")
       $.ajax({
         url: '/checkWallet',
         method: 'post',
         success: (response) => {
-          
+
           if (response.success) {
             console.log("success");
-              walletPlace.innerHTML = response.walleta
-              let test=  amount-response.walleta
-              if(test < 0 ){
-                totalAmount.innerHTML = 10 
-                radioDiv.innerHTML = "You have pay minimum ₹10"
-              }else{
-                totalAmount.innerHTML = test
+            walletPlace.innerHTML = response.walleta
+            let test = amount - response.walleta
+            if (test < 0) {
+              totalAmount.innerHTML = 10
+              radioDiv.innerHTML = "You have pay minimum ₹10"
+            } else {
+              totalAmount.innerHTML = test
               radioDiv.classList.add("d-none");
-              }
-             
-                
+            }
 
 
 
-          }else{
+
+
+          } else {
             console.log("fail");
           }
         }

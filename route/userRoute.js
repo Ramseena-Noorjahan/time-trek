@@ -90,10 +90,10 @@ userRoute.get(
 );
 
 //return order
-userRoute.get("/returnOrder", authMiddleware.logged, userCotroller.returnOrder);
+userRoute.post("/returnOrder", authMiddleware.logged, userCotroller.returnOrder);
 
 //cancel order
-userRoute.get("/cancelOrder", authMiddleware.logged, userCotroller.cancelOrder);
+userRoute.post("/cancelOrder", authMiddleware.logged, userCotroller.cancelOrder);
 
 //editProfile
 userRoute.post(

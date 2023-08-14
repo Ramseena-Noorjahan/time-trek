@@ -50,6 +50,11 @@ const orderSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    reason: {
+        type:String
+        
+    },
+    
 },
   {
     timestamps: true
